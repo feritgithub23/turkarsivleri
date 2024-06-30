@@ -1,0 +1,39 @@
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CommandHandler, CallbackContext
+
+# Tokeninizi burada belirleyin
+TELEGRAM_BOT_TOKEN = '7312994826:AAE3cOl6e53IHfooDYZ5meo6THraOvDoAJQ'
+
+def start(update: Update, context: CallbackContext) -> None:
+    # Kullanıcıya gönderilecek linkler
+    links = [
+        ("TÜRK İFŞA", "https://t.me/+Sq2kGnis84w0M2E0"),
+        ("GİZLİ ÇEKİM", ''https://t.me/+0bdPsmMZlao5OTQx"),
+        ("TECAVÜZ", "https://t.me/+khoUKTloHGQxYmEx"),
+        ("İFŞA TÜRKİYE", "https://t.me/+dljurZl0pUc3Yjlh"),
+        ("ÖĞRETMEN SEKS", "https://t.me/+I0ELOcb5SK5lYzY0"),
+    ]
+    
+    # Butonları oluşturma
+    keyboard = [[InlineKeyboardButton(text, url=url)] for text, url in links]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Mesajı ve butonları gönder
+    update.message.reply_text("TÜM İFŞA SAYFALARIMIZA KATILIMINIZI BEKLERİZ DAHA FAZLALARI @tumkanallarimiz", reply_markup=reply_markup)
+
+def main() -> None:
+    # Updater ve Dispatcher oluştur
+    updater = Updater(TELEGRAM_BOT_TOKEN)
+    dispatcher = updater.dispatcher
+
+    # /start komutu için handler ekle
+    dispatcher.add_handler(CommandHandler("start", start))
+
+    # Botu başlat
+    updater.start_polling()
+
+    # Botu çalışır halde tut
+    updater.idle()
+
+if name == 'main':
+    main()
